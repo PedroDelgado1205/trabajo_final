@@ -3,13 +3,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_animate/flutter_animate.dart'; // Importa flutter_animate
-import 'package:getwidget/getwidget.dart'; // Importa getwidget
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:trabajo_final/config/theme/app_theme.dart';
 
 import 'package:trabajo_final/infraestructure/datasources/book_remote_datasource.dart';
 import 'package:trabajo_final/infraestructure/repositories/book_repository_impl.dart';
 import 'package:trabajo_final/presentation/providers/book_search_provider.dart';
 import 'package:trabajo_final/presentation/screens/search_page.dart';
+
+
+
 
 void main() {
   final bookRemoteDataSource = BookRemoteDataSourceImpl(client: http.Client());
@@ -35,10 +39,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Open Library Search',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        // Puedes personalizar el tema aquí según los widgets de getwidget
-      ),
+      theme: AppTheme().getTheme(),
       home: const SearchPage(),
     );
   }

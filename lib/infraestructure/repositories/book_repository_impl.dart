@@ -10,10 +10,8 @@ class BookRepositoryImpl implements BookRepository {
 
   @override
   Future<List<Book>> searchBooks(String query) async {
-    // Obtén los datos desde el remote data source
     final List<BookModel> results = await remoteDataSource.searchBooks(query);
 
-    // Convierte cada BookModel a Book
     return results
         .map((bookModel) => Book(
               title: bookModel.title,

@@ -94,7 +94,6 @@ class BookModel {
     return null;
   }
 
-  // Implementación de `fromDomain`
   static BookModel fromDomain(Book book) {
     return BookModel(
       title: book.title,

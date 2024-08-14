@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trabajo_final/domain/entities/book.dart';
 import 'package:trabajo_final/domain/repositories/book_repository.dart';
+import 'package:trabajo_final/infraestructure/models/book_models.dart';
 
 class BookSearchProvider with ChangeNotifier {
   final BookRepository repository;
@@ -14,6 +15,9 @@ class BookSearchProvider with ChangeNotifier {
   String? get error => _error;
 
   String _lastQuery = '';
+  
+  final List<Book> _recentBooks = [];
+  List<BookModel> get recentBooks => convertBooksToBookModels(_recentBooks);
 
   BookSearchProvider({required this.repository});
 
@@ -30,7 +34,14 @@ class BookSearchProvider with ChangeNotifier {
         _books = [];
       } else {
         final results = await repository.searchBooks(query);
-        _books = results.take(25).toList();  // Limita los resultados a un máximo de 25 libros
+        _books = results.take(25).toList();
+
+        _recentBooks.removeWhere((book) => _books.contains(book));
+        _recentBooks.insertAll(0, _books);
+
+        if (_recentBooks.length > 10) {
+          _recentBooks.removeRange(10, _recentBooks.length);
+        }
       }
     } catch (error) {
       _error = 'Error durante la búsqueda: $error';
@@ -38,5 +49,9 @@ class BookSearchProvider with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  List<BookModel> convertBooksToBookModels(List<Book> books) {
+    return books.map((book) => BookModel.fromDomain(book)).toList();
   }
 }

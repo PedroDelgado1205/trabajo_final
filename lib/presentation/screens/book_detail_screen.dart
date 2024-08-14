@@ -1,11 +1,11 @@
 // ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Importa servicios para copiar al portapapeles
-import 'package:flutter_animate/flutter_animate.dart'; // Importa flutter_animate
-import 'package:getwidget/getwidget.dart'; // Importa getwidget
+import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:trabajo_final/infraestructure/models/book_models.dart';
-import 'package:url_launcher/url_launcher.dart'; // Importa url_launcher
+import 'package:url_launcher/url_launcher.dart';
 
 class BookDetailScreen extends StatelessWidget {
   final BookModel book;
@@ -20,7 +20,7 @@ class BookDetailScreen extends StatelessWidget {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      _showUrlDialog(url, context); // Muestra el diálogo si no se puede abrir la URL
+      _showUrlDialog(url, context); 
       // ignore: avoid_print
       print('No se pudo abrir la URL: $url');
     }
@@ -106,7 +106,7 @@ class BookDetailScreen extends StatelessWidget {
             if (book.numberofpagesmedian != null)
               Text(
                 'Número de páginas: ${book.numberofpagesmedian}',
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.bodySmall,
               ).animate().fadeIn(duration: 1.seconds),
             if (book.description != null)
               Text(

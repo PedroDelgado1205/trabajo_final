@@ -15,7 +15,7 @@ class BookRemoteDataSourceImpl implements BookRemoteDataSource {
   @override
   Future<List<BookModel>> searchBooks(String query) async {
     final response = await client.get(
-      Uri.parse('$BASE_URL/search.json?q=$query&limit=25'),  // Limita a 25 resultados
+      Uri.parse('$BASE_URL/search.json?q=$query&limit=25'),
     );
 
     if (response.statusCode == 200) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart'; // Importa flutter_animate
-import 'package:getwidget/getwidget.dart'; // Importa getwidget
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:trabajo_final/infraestructure/models/book_models.dart';
 import 'package:trabajo_final/presentation/screens/book_detail_screen.dart';
 
@@ -11,6 +11,8 @@ class BookList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return ListView.builder(
       itemCount: books.length,
       itemBuilder: (context, index) {
@@ -26,8 +28,14 @@ class BookList extends StatelessWidget {
                   radius: 30,
                   child: Icon(Icons.book, size: 30),
                 ),
-          titleText: book.title,
-          subTitleText: book.authorName?.join(", ") ?? "Autor desconocido",
+          title: Text(
+            book.title,
+            style: theme.textTheme.bodyLarge,
+          ),
+          subTitle: Text(
+            book.authorName?.join(", ") ?? "Autor desconocido",
+            style: theme.textTheme.bodySmall,
+          ),
           onTap: () {
             Navigator.push(
               context,
