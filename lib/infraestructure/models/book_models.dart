@@ -47,7 +47,7 @@ class BookModel {
       isbn: (json['isbn'] as List<dynamic>?)
           ?.map((isbn) => isbn as String)
           .toList(),
-      description: json['description'] as String?,
+      description: _extractFirstString(json['first_sentence']),
       location: _extractFirstString(json['location']),
       translatedFrom: _extractFirstString(json['translated_from']),
       contributor: _extractFirstString(json['contributor']),

@@ -15,9 +15,9 @@ class BookSearchProvider with ChangeNotifier {
   String? get error => _error;
 
   String _lastQuery = '';
-  
-  final List<Book> _recentBooks = [];
-  List<BookModel> get recentBooks => convertBooksToBookModels(_recentBooks);
+
+  final List<BookModel> _recentBooks = [];
+  List<BookModel> get recentBooks => List.unmodifiable(_recentBooks);
 
   BookSearchProvider({required this.repository});
 
@@ -28,20 +28,13 @@ class BookSearchProvider with ChangeNotifier {
     _isLoading = true;
     _error = null;
     notifyListeners();
-  
+
     try {
       if (query.isEmpty) {
         _books = [];
       } else {
         final results = await repository.searchBooks(query);
         _books = results.take(25).toList();
-
-        _recentBooks.removeWhere((book) => _books.contains(book));
-        _recentBooks.insertAll(0, _books);
-
-        if (_recentBooks.length > 10) {
-          _recentBooks.removeRange(10, _recentBooks.length);
-        }
       }
     } catch (error) {
       _error = 'Error durante la búsqueda: $error';
@@ -53,5 +46,15 @@ class BookSearchProvider with ChangeNotifier {
 
   List<BookModel> convertBooksToBookModels(List<Book> books) {
     return books.map((book) => BookModel.fromDomain(book)).toList();
+  }
+
+  void addToRecentBooks(BookModel book) {
+    if (!_recentBooks.contains(book)) {
+      _recentBooks.insert(0, book);
+      if (_recentBooks.length > 10) {
+        _recentBooks.removeLast();
+      }
+      notifyListeners();
+    }
   }
 }

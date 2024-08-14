@@ -88,40 +88,52 @@ class BookDetailScreen extends StatelessWidget {
                   .animate()
                   .fadeIn(duration: 1.seconds),
             const SizedBox(height: 16),
-            Text(
-              book.title,
-              style: Theme.of(context).textTheme.titleLarge,
-            ).animate().fadeIn(duration: 1.seconds),
+            Center(
+              child: Text(
+                book.title,
+                style: Theme.of(context).textTheme.titleLarge,
+              ).animate().fadeIn(duration: 1.seconds),
+            ),
             const SizedBox(height: 8),
             if (book.authorName != null)
-              Text(
-                'Autor${book.authorName!.length > 1 ? 'es' : ''}: ${book.authorName!.join(', ')}',
-                style: Theme.of(context).textTheme.titleSmall,
-              ).animate().fadeIn(duration: 1.seconds),
+              Center(
+                child: Text(
+                  'Autor${book.authorName!.length > 1 ? 'es' : ''}: ${book.authorName!.join(', ')}',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ).animate().fadeIn(duration: 1.seconds),
+              ),
             if (book.firstPublishYear != null)
-              Text(
-                'Publicado en ${book.firstPublishYear}',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ).animate().fadeIn(duration: 1.seconds),
+              Center(
+                child: Text(
+                  'Publicado en ${book.firstPublishYear}',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ).animate().fadeIn(duration: 1.seconds),
+              ),
             if (book.numberofpagesmedian != null)
-              Text(
-                'Número de páginas: ${book.numberofpagesmedian}',
-                style: Theme.of(context).textTheme.bodySmall,
-              ).animate().fadeIn(duration: 1.seconds),
+              Center(
+                child: Text(
+                  'Número de páginas: ${book.numberofpagesmedian}',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ).animate().fadeIn(duration: 1.seconds),
+              ),
             if (book.description != null)
-              Text(
-                book.description!,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ).animate().fadeIn(duration: 1.seconds),
+              Center(
+                child: Text(
+                  book.description!,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ).animate().fadeIn(duration: 1.seconds),
+              ),
             if (book.idAmazon != null && book.idAmazon!.isNotEmpty)
-              ElevatedButton(
-                onPressed: () {
-                  final amazonId = book.idAmazon!.first;
-                  final amazonUrl = 'https://www.amazon.com/s?k=$amazonId';
-                  _launchURL(amazonUrl, context);
-                },
-                child: const Text('Obten el libro'),
-              ).animate().fadeIn(duration: 1.seconds),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    final amazonId = book.idAmazon!.first;
+                    final amazonUrl = 'https://www.amazon.com/s?k=$amazonId';
+                    _launchURL(amazonUrl, context);
+                  },
+                  child: const Text('Obten el libro'),
+                ).animate().fadeIn(duration: 1.seconds),
+              ),
           ],
         ),
       ),
