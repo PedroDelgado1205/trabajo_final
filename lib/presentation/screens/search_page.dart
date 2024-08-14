@@ -30,7 +30,7 @@ class SearchPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-              style: theme.textTheme.bodySmall, 
+              style: theme.textTheme.titleLarge, 
             ),
             const SizedBox(height: 16),
             if (provider.isLoading)
