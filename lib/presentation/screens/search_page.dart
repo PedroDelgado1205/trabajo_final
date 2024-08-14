@@ -55,10 +55,8 @@ class SearchPage extends StatelessWidget {
                 child: BookList(
                   books: provider.convertBooksToBookModels(provider.books),
                   onBookTap: (book) {
-                    // Agrega el libro a los libros recientes
                     provider.addToRecentBooks(book);
 
-                    // Navega a la pantalla de detalles del libro
                     Navigator.push(
                       context,
                       MaterialPageRoute(

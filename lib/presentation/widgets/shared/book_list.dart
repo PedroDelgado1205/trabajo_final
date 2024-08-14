@@ -5,12 +5,12 @@ import 'package:trabajo_final/infraestructure/models/book_models.dart';
 
 class BookList extends StatelessWidget {
   final List<BookModel> books;
-  final void Function(BookModel) onBookTap; // Agregar el callback
+  final void Function(BookModel) onBookTap;
 
   const BookList({
     super.key,
     required this.books,
-    required this.onBookTap, // Aceptar el callback en el constructor
+    required this.onBookTap,
   });
 
   @override
@@ -41,7 +41,7 @@ class BookList extends StatelessWidget {
             style: theme.textTheme.bodySmall,
           ),
           onTap: () {
-            onBookTap(book); // Llamar al callback cuando se toca el libro
+            onBookTap(book);
           },
         ).animate().fadeIn(duration: 0.5.seconds);
       },

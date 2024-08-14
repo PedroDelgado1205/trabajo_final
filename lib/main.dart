@@ -1,10 +1,7 @@
-// ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:trabajo_final/config/theme/app_theme.dart';
 
 import 'package:trabajo_final/infraestructure/datasources/book_remote_datasource.dart';
