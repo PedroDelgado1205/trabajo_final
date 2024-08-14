@@ -46,11 +46,16 @@ class SearchPage extends StatelessWidget {
               Center(
                 child: Text(
                   'No se encontraron resultados',
-                  style: theme.textTheme.bodySmall,
+                  style: theme.textTheme.bodyMedium, 
                 ),
               ),
             if (provider.books.isNotEmpty && !provider.isLoading)
               Expanded(child: BookList(books: provider.convertBooksToBookModels(provider.books))),
+            const SizedBox(height: 16),
+            if (provider.recentBooks.isNotEmpty) ...[
+              Text('Últimos libros buscados:', style: Theme.of(context).textTheme.titleMedium),
+              Expanded(child: BookList(books: provider.recentBooks)),
+            ],
           ],
         ),
       ),
