@@ -116,4 +116,16 @@ class BookModel {
       idAmazon: book.idAmazon
     );
   }
+
+  factory BookModel.fromBook(Book book) {
+    return BookModel(
+      title: book.title,
+      authorName: book.authorName,
+      firstPublishYear: book.firstPublishYear,
+      coverUrl: book.coverUrl,
+      description: book.description,
+      idAmazon: book.idAmazon,
+      numberofpagesmedian: book.numberofpagesmedian as int,
+    );
+  }
 }

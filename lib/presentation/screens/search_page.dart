@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trabajo_final/presentation/providers/book_search_provider.dart';
 import 'package:trabajo_final/presentation/widgets/shared/book_list.dart';
+import 'package:trabajo_final/presentation/screens/book_detail_screen.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -30,7 +31,7 @@ class SearchPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-              style: theme.textTheme.titleLarge, 
+              style: theme.textTheme.titleLarge,
             ),
             const SizedBox(height: 16),
             if (provider.isLoading)
@@ -46,15 +47,43 @@ class SearchPage extends StatelessWidget {
               Center(
                 child: Text(
                   'No se encontraron resultados',
-                  style: theme.textTheme.bodyMedium, 
+                  style: theme.textTheme.bodyMedium,
                 ),
               ),
             if (provider.books.isNotEmpty && !provider.isLoading)
-              Expanded(child: BookList(books: provider.convertBooksToBookModels(provider.books))),
+              Expanded(
+                child: BookList(
+                  books: provider.convertBooksToBookModels(provider.books),
+                  onBookTap: (book) {
+                    // Agrega el libro a los libros recientes
+                    provider.addToRecentBooks(book);
+
+                    // Navega a la pantalla de detalles del libro
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BookDetailScreen(book: book),
+                      ),
+                    );
+                  },
+                ),
+              ),
             const SizedBox(height: 16),
             if (provider.recentBooks.isNotEmpty) ...[
               Text('Últimos libros buscados:', style: Theme.of(context).textTheme.titleMedium),
-              Expanded(child: BookList(books: provider.recentBooks)),
+              Expanded(
+                child: BookList(
+                  books: provider.recentBooks,
+                  onBookTap: (book) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BookDetailScreen(book: book),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ],
           ],
         ),

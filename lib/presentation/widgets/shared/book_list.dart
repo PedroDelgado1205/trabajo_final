@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:trabajo_final/infraestructure/models/book_models.dart';
-import 'package:trabajo_final/presentation/screens/book_detail_screen.dart';
 
 class BookList extends StatelessWidget {
   final List<BookModel> books;
+  final void Function(BookModel) onBookTap; // Agregar el callback
 
-  const BookList({super.key, required this.books});
+  const BookList({
+    super.key,
+    required this.books,
+    required this.onBookTap, // Aceptar el callback en el constructor
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +41,7 @@ class BookList extends StatelessWidget {
             style: theme.textTheme.bodySmall,
           ),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BookDetailScreen(book: book),
-              ),
-            );
+            onBookTap(book); // Llamar al callback cuando se toca el libro
           },
         ).animate().fadeIn(duration: 0.5.seconds);
       },
